@@ -35,7 +35,7 @@ func (t Training) distance() float64 {
 func (t Training) meanSpeed() float64 {
 	// Формула расчета:
 	//преодолённая_дистанция_за_тренировку_в_км / время_тренировки_в_часах
-	return (t.distance() / (float64(t.Duration.Minutes()) / float64(MinInHours)))
+	return (t.distance() / t.Duration.Hours())
 }
 
 // Calories возвращает количество потраченных килокалорий на тренировке.
@@ -110,13 +110,7 @@ func (r Running) Calories() float64 {
 // Это переопределенный метод TrainingInfo() из Training.
 func (r Running) TrainingInfo() InfoMessage {
 	// вставьте ваш код ниже
-	return InfoMessage{
-		TrainingType: r.TrainingType,
-		Duration:     r.Duration,
-		Distance:     r.distance(),
-		Speed:        r.meanSpeed(),
-		Calories:     r.Calories(),
-	}
+	return r.Training.TrainingInfo()
 }
 
 // Константы для расчета потраченных килокалорий при ходьбе.
@@ -149,13 +143,7 @@ func (w Walking) Calories() float64 {
 // Это переопределенный метод TrainingInfo() из Training.
 func (w Walking) TrainingInfo() InfoMessage {
 	// вставьте ваш код ниже
-	return InfoMessage{
-		TrainingType: w.TrainingType,
-		Duration:     w.Duration,
-		Distance:     w.distance(),
-		Speed:        w.meanSpeed(),
-		Calories:     w.Calories(),
-	}
+	return w.Training.TrainingInfo()
 }
 
 // Константы для расчета потраченных килокалорий при плавании.
